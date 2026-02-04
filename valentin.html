@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Quieres ser mi valentín?</title>
+
+  <!-- Confeti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 30px;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 22px 40px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #no {
+      background-color: #f44336;
+      color: white;
+      position: relative;
+    }
+
+    #gif {
+      display: none;
+      margin-top: 30px;
+    }
+
+    img {
+      width: 650px;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 id="title">¿Quieres ser mi Valentín?</h1>
+
+    <div class="buttons">
+      <button id="yes">Sí</button>
+      <button id="no">No</button>
+    </div>
+
+    <div id="gif">
+      <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeG54dWhoZjk2YnZidjF0ZGlhNHc3d3N6eXhtajJyNDBwMmVzcjBtZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13Iu9mjLpXF0ek/giphy.gif">
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const gif = document.getElementById("gif");
+    const title = document.getElementById("title");
+    const buttons = document.querySelector(".buttons");
+
+    // Función para que el botón NO escape
+    function escapar() {
+      const x = Math.random() * 500 - 250;
+      const y = Math.random() * 300 - 150;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    noBtn.addEventListener("mouseenter", escapar);
+    noBtn.addEventListener("touchstart", escapar);
+    noBtn.addEventListener("mousemove", escapar);
+
+    // Click en SÍ
+    yesBtn.addEventListener("click", () => {
+      title.innerHTML = `
+        Told you… ser un nerd tiene sus ventajas<br>
+        <span style="font-size:22px;">(¿Vamos a brunchear el sábado 14?)</span>
+      `;
+      gif.style.display = "block";
+      buttons.style.display = "none";
+
+      confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.6 }
+      });
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 150,
+          spread: 120,
+          origin: { y: 0.4 }
+        });
+      }, 300);
+    });
+
+    // Click en NO (si logra hacerlo)
+    noBtn.addEventListener("click", () => {
+      title.textContent = "¿Segura?";
+    });
+  </script>
+
+</body>
+</html>
